@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1"
+    "googleapis": "^61.0.0",
+    "leaflet": "^1.7.1",
+    "node-fetch": "^2.6.1",
+    "tedious": "^9.2.1"
   }
 }
