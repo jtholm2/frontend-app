@@ -19,6 +19,7 @@
     latitude: <span id="lat"></span><br />
     longitude: <span id="lon"></span>
   </p>
+
   <button onclick="getData()">ISS Location</button>
   
   <div id="mapid"></div>
@@ -31,18 +32,22 @@
         }).addTo(mymap);
 
     async function getData() {
-      const response = await fetch("http://api.open-notify.org/iss-now.json");
-      const data = await response.json();
-      const { latitude, longitude } = data["iss_position"];
-      document.getElementById('lat').textContent = latitude;
-      document.getElementById('lon').textContent = longitude;
-
-      L.circleMarker([latitude,longitude]).addTo(mymap)
-	      .bindPopup(
-		    'ISS<br>'
-	      )
-	      .openPopup();
-    }
+      fetch("http://localhost:9000/iss").then(function (response) {
+        response.json().then(function(json) {
+          const latitude = Number(json["iss_position"]["latitude"]);
+          const longitude = Number(json["iss_position"]["longitude"]);
+          
+          document.getElementById('lat').textContent = latitude;
+          document.getElementById('lon').textContent = longitude;
+          
+          L.circleMarker([latitude,longitude]).addTo(mymap)
+            .bindPopup(
+            'ISS<br>'
+            )
+            .openPopup();
+        })
+      });
+    };
 
   </script>
 </body>
