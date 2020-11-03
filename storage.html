@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <button onclick="getTestFile()">File Retrieval</button>
+
+        <div id ="headerOne"></div>
+        <div id="paraOne"></div><br />
+        <div id="stepContainer"></div>
+    </body>
+    
+    <script>
+        async function getTestFile() {
+            fetch("http://localhost:9000/storage").then(function (response) {
+                response.json().then(function(json) {
+                    document.getElementById("headerOne").innerHTML = '<h1>' + json["html"]["h1"] + '</h1>';
+                    document.getElementById("paraOne").innerHTML = '<p1>' + json["html"]["p1"] + '</p1>';
+                    
+                    var steps = json["html"]["ol"]["li"];
+                    var str = '<p>Steps to Follow:</p><ul>';
+
+                    steps.forEach(function(step) {
+                        str += '<li>' + step + '</li>';
+                    });
+
+                    str += "</ul>";
+
+                    document.getElementById("stepContainer").innerHTML = str;
+                });
+            });
+        };
+    </script>
+</html>
