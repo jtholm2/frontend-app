@@ -1,6 +1,12 @@
 <html>
     <body>
-        <button onclick="getTestFile()">File Retrieval</button>
+        <label for="files">Choose a file:</label>
+        <select id="files" onchange="setFile()">
+            <option value="blank"> </option>
+            <option value="json-retriever-test.json">json-retriever-test.json</option>
+            <option value="json-retrieval-test2.json">json-retrieval-test2.json</option>
+          </select>
+        <button onclick="retrieveAzureFile()">File Retrieval</button>
 
         <div id ="headerOne"></div>
         <div id="paraOne"></div><br />
@@ -8,24 +14,30 @@
     </body>
     
     <script>
-        async function getTestFile() {
-            fetch("http://localhost:9000/storage").then(function (response) {
-                response.json().then(function(json) {
-                    document.getElementById("headerOne").innerHTML = '<h1>' + json["html"]["h1"] + '</h1>';
-                    document.getElementById("paraOne").innerHTML = '<p1>' + json["html"]["p1"] + '</p1>';
-                    
-                    var steps = json["html"]["ol"]["li"];
-                    var str = '<p>Steps to Follow:</p><ul>';
+        var fileToRetrieve = document.getElementById('files').value;
 
-                    steps.forEach(function(step) {
-                        str += '<li>' + step + '</li>';
-                    });
+        function setFile(){
+             fileToRetrieve = document.getElementById('files').value;
+        }
 
-                    str += "</ul>";
+        async function retrieveAzureFile() {
+            console.log(fileToRetrieve)
+            var jsonDataToSend = {fileName: fileToRetrieve}
+            const url = "http://localhost:9000/azurestorage";
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            const data = jsonDataToSend;
 
-                    document.getElementById("stepContainer").innerHTML = str;
-                });
-            });
+            fetch(url, {method: 'POST', headers: headers, body: JSON.stringify(data)})
+                .then((res) => {
+                    return res.json()
+                })
+                .then((json) => {
+                    document.getElementById("headerOne").innerHTML = json["html"]["h1"]
+                    document.getElementById("paraOne").innerHTML = json["html"]["p1"]
+                    document.getElementById("stepContainer").innerHTML = json["html"]["ol"]
+                })
         };
     </script>
 </html>
