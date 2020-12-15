@@ -14,16 +14,27 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
-  
+
 - task: PublishPipelineArtifact@0
   displayName: 'Publish pipeline artifacts'
   inputs:
-    targetPath: $(Build.ArtifactStagingDirectory)/
+    targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
 
-- task: PublishBuildArtifacts@1
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    pathToPublish: /home/vsts/work/1/s/
+#    artifactName: 'drop' 
+#    publishLocation: 'Container'
 
-- script: |
+- script:
+    npm cache clean --force
+- script:
+    rm -rf node_modules package-lock.json
+- script:
+    rm -rf node_modules package-lock.json
+- script:
     npm install --only=dev
-    npm run build
-  displayName: 'npm install and build'
+- script:
+    npm run start
+  displayName: 'npm install and start'
