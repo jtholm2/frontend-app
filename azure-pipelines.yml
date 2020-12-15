@@ -21,6 +21,8 @@ steps:
     targetPath: $(Build.ArtifactStagingDirectory)/
     archiveFilePatterns: '**/*.zip'
 
+- task: PublishBuildArtifacts@1
+
 - script: |
     npm install --only=dev
     npm run build
