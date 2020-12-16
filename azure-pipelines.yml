@@ -21,5 +21,6 @@ steps:
     targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
     
-- script: npm install --only=dev
+- script: npm cache clean --force
+- script: npm install
 - script: npm run build
