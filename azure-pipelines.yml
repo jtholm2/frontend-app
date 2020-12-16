@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    sudo npm install
+    sudo npm install && sudo npm install -g eslint
     sudo npm run build
   displayName: 'npm install and build'
 
