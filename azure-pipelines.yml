@@ -15,12 +15,13 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: npm install && npm install tslint
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 
 - task: PublishPipelineArtifact@0
   displayName: 'Publish pipeline artifacts'
   inputs:
     targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
-
-- script: npm run build
