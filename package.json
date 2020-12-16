@@ -4,9 +4,9 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "transpile": "sudo tsc",
-    "lint": "sudo eslint --ext .ts .",
-    "build": "sudo npm run lint && sudo npm run transpile",
+    "transpile": "tsc",
+    "lint": "eslint --ext .ts .",
+    "build": "npm run lint && npm run transpile",
     "prestart": "npm run build",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
