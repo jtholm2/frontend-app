@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "transpile": "tsc",
-    "lint": "eslint --ext .ts .",
+    "transpile": "sudo tsc",
+    "lint": "sudo eslint --ext .ts .",
     "build": "npm run lint && npm run transpile",
     "prestart": "npm run build",
     "start": "node .",
