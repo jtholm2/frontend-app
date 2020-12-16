@@ -16,6 +16,8 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    npm cache clean --force
+    rm -rf node_modules package-lock.json
     npm install
     npm run build
   displayName: 'npm install and build'
