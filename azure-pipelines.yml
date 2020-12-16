@@ -21,7 +21,5 @@ steps:
     targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
     
-- script:
-  npm install --only=dev
-  npm run build
-  displayName: 'npm install and build'
+- script: npm install --only=dev
+- script: npm run build
