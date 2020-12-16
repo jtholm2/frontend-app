@@ -20,21 +20,8 @@ steps:
   inputs:
     targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
-
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    pathToPublish: /home/vsts/work/1/s/
-#    artifactName: 'drop' 
-#    publishLocation: 'Container'
-
+    
 - script:
-    npm cache clean --force
-- script:
-    rm -rf node_modules package-lock.json
-- script:
-    rm -rf node_modules package-lock.json
-- script:
-    npm install --only=dev
-- script:
-    npm run start
-  displayName: 'npm install and start'
+  npm install --only=dev
+  npm run build
+  displayName: 'npm install and build'
