@@ -15,12 +15,12 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
+- script: npm install
+
 - task: PublishPipelineArtifact@0
   displayName: 'Publish pipeline artifacts'
   inputs:
     targetPath: /home/vsts/work/1/s/
     archiveFilePatterns: '**/*.zip'
-    
-- script: npm cache clean --force
-- script: npm install
+
 - script: npm run build
