@@ -5,8 +5,8 @@
   "main": "dist/server.js",
   "scripts": {
     "transpile": "tsc",
-    "lint": "sudo eslint --ext .ts .",
-    "lintertest": "npm -g i eslint-cli && npm i eslint --save-dev",
+    "lint": "eslint --ext .ts .",
+    "lintertest": "npm i eslint --save-dev",
     "build": "npm run lintertest && npm run lint && npm run transpile",
     "prestart": "npm run build",
     "start": "node .",
