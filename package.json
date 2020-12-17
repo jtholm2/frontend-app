@@ -6,7 +6,8 @@
   "scripts": {
     "transpile": "tsc",
     "lint": "sudo eslint --ext .ts .",
-    "build": "npm run lint && npm run transpile",
+    "lintertest": "npm -g i eslint-cli && npm i eslint --save-dev",
+    "build": "npm run lintertest && npm run lint && npm run transpile",
     "prestart": "npm run build",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
