@@ -23,7 +23,7 @@
         async function retrieveAzureFile() {
             console.log(fileToRetrieve)
             var jsonDataToSend = {fileName: fileToRetrieve}
-            const url = "http://localhost:9000/azurestorage";
+            const url = "https://sre-experimentation-backend.azurewebsites.net/azurestorage";
             const headers = {
                 'Content-Type': 'application/json'
             };

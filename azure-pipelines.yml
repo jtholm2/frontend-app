@@ -1,27 +1,51 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    sudo npm install
-    npm run build
-  displayName: 'npm install and build'
-
-- task: PublishPipelineArtifact@0
-  displayName: 'Publish pipeline artifacts'
-  inputs:
-    targetPath: /home/vsts/work/1/s/
-    archiveFilePatterns: '**/*.zip'
+variables:
+  nodeVersion: 10.x
+  
+stages:
+  - stage: package
+    displayName: Deployment package
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      archive_name: sre-experimentation-frontend
+      node_env: production
+    jobs:
+      - job: build
+        displayName: Build and archive package
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(nodeVersion)
+            displayName: Install Node.js $(nodeVersion)
+          - script: NODE_ENV=development npm i
+            displayName: npm install (for build)
+          - script: npm run compile
+            displayName: Compile typescript
+          - script: |
+              rm -rf node_modules
+              npm i
+            displayName: npm install
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)'
+              Contents: |
+                node_modules/**
+                dist/*.js
+                public/**
+                package.json
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/$(archive_name)'
+          - powershell: |
+              Set-Content -Path "$(Build.ArtifactStagingDirectory)/$(archive_name)/buildver.json" -Value '{"buildVersion":"$(Build.BuildNumber)"}'
+            displayName: Generate buildver.json
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/$(archive_name)'
+              includeRootFolder: false
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(archive_name).$(Build.BuildId).zip'
+          - task: PublishPipelineArtifact@1
+            inputs:
+              artifact: archive
+              path: '$(Build.ArtifactStagingDirectory)/$(archive_name).$(Build.BuildId).zip'

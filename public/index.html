@@ -32,7 +32,7 @@
         }).addTo(mymap);
 
     async function getData() {
-      fetch("http://localhost:9000/iss").then(function (response) {
+      fetch("https://sre-experimentation-backend.azurewebsites.net/iss").then(function (response) {
         response.json().then(function(json) {
           const latitude = Number(json["iss_position"]["latitude"]);
           const longitude = Number(json["iss_position"]["longitude"]);
