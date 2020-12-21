@@ -20,6 +20,9 @@ stages:
             inputs:
               versionSpec: $(nodeVersion)
             displayName: Install Node.js $(nodeVersion)
+          - task: npmAuthenticate@0
+            inputs:
+              workingFile: .npmrc
           - script: NODE_ENV=development npm i
             displayName: npm install (for build)
           - script: npm run compile
