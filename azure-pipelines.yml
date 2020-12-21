@@ -49,3 +49,15 @@ stages:
             inputs:
               artifact: archive
               path: '$(Build.ArtifactStagingDirectory)/$(archive_name).$(Build.BuildId).zip'
+  - stage: publish
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), in(variables['Build.SourceBranchName'], 'main'))
+    displayName: NPM publish (private registry)
+    jobs:
+      - job: publish
+        steps:
+          - task: npmAuthenticate@0
+            inputs:
+              workingFile: .npmrc
+          - bash: |
+              npm publish
+            displayName: Publish as node module to "docs" feed
