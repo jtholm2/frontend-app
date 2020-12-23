@@ -7,7 +7,6 @@
     "compile": "tsc",
     "lint": "eslint --ext .ts .",
     "build": "npm run lint && npm run compile",
-    //"prestart": "npm run build",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
