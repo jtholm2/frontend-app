@@ -12,4 +12,6 @@ RUN npm install
 # To copy all application packages 
 COPY . .
 
-ENTRYPOINT ["npm", "start"]
+EXPOSE 8080
+
+CMD ["node", "./dist/server.js"]
