@@ -13,4 +13,4 @@ steps:
   inputs:
     repository: $(imageName)
     command: build
-    Dockerfile: frontendapp/Dockerfile
+    Dockerfile: /home/vsts/work/1/s/frontendapp/Dockerfile 
