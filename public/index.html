@@ -1,54 +1,26 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
-	<title>JT's Website</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-   <style>#mapid { height: 2000px; }</style>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SRE Experimentation Home Page</title>
+    <a href="/iss">ISS Real-Time Tracking</a>
+    <a href="/azurestorage">Download Azure Blobs</a>
+    <a href="/kassiendpoint">Kassi's Endpoint</a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
-  <h1>Current Location of the ISS</h1>
-  <p>
-    latitude: <span id="lat"></span><br />
-    longitude: <span id="lon"></span>
-  </p>
+    <h1>About</h1>
+    <p1>This is the home page for the US/TS DevRel SRE Experimentation full stack web application. At the top of this page, you'll find hyperlinks to the other pages within the application.</p1>
 
-  <button onclick="getData()">ISS Location</button>
-  
-  <div id="mapid"></div>
-
-  <script>
-    const mymap = L.map('mapid').setView([0, 0], 3);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(mymap);
-
-    async function getData() {
-      fetch("https://sre-experimentation-backend.azurewebsites.net/iss").then(function (response) {
-        response.json().then(function(json) {
-          const latitude = Number(json["iss_position"]["latitude"]);
-          const longitude = Number(json["iss_position"]["longitude"]);
-          
-          document.getElementById('lat').textContent = latitude;
-          document.getElementById('lon').textContent = longitude;
-          
-          L.circleMarker([latitude,longitude]).addTo(mymap)
-            .bindPopup(
-            'ISS<br>'
-            )
-            .openPopup();
-        })
-      });
-    };
-
-  </script>
+    <h2>Contributors include</h2>
+    <ul>
+        <li>Rich Doty</li>
+        <li>Kassi Campbell</li>
+        <li>JT Holmes</li>
+    </ul>
 </body>
+
 </html>

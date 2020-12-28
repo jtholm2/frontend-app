@@ -11,8 +11,14 @@ app.use(express_1.default.json());
 app.get('/', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'index.html'));
 });
+app.get('/iss', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '..', 'public', 'iss.html'));
+});
 app.get('/azurestorage', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'storage.html'));
+});
+app.get('/kassiendpoint', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '..', 'public', 'Kassi.html'));
 });
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
