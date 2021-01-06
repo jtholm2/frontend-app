@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 const path_1 = __importDefault(require("path"));
 const port = process.env.PORT;
+
 app.use(express_1.default.json());
 app.get('/', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'index.html'));
@@ -20,7 +21,9 @@ app.get('/azurestorage', (req, res) => {
 app.get('/kassiendpoint', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'Kassi.html'));
 });
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+ app.listen(port, () => {
+     console.log(`Example app listening at http://localhost:${port}`);
+ });
+
+//module.exports = app.listen(3000); to be used with unit testing, aka 'npm test'
 //# sourceMappingURL=server.js.map

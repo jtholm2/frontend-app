@@ -2,7 +2,6 @@ import express from 'express';
 const app = express();
 import path from 'path';
 const port = process.env.PORT;
-
 app.use(express.json());
 
 app.get('/', (req, res) => {
