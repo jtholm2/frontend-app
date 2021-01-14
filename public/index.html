@@ -5,14 +5,16 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SRE Experimentation Home Page</title>
-    <script type="text/javascript">
-        $(function () {
-            var includes = $('[data-include-html]')
-            $.each(includes, function () {
-                var file = $(this).data('include') + '.html'
-                $(this).load(file)
-            })
-        })
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                var includes = $('[data-include-html]')
+                $.each(includes, function () {
+                    var file = $(this).data('include') + '.html'
+                    $(this).load(file)
+                });
+            });
+        });
     </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
@@ -28,6 +30,7 @@
         <li>Kassi Campbell</li>
         <li>JT Holmes</li>
     </ul>
+    <script type="text/javascript">alert("this is my alert");</script>
 </body>
 
 </html>
