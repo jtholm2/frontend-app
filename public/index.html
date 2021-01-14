@@ -5,11 +5,20 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SRE Experimentation Home Page</title>
-    
+    <script type="text/javascript">
+        $(function () {
+            var includes = $('[data-include-html]')
+            $.each(includes, function () {
+                var file = 'views/' + $(this).data('include') + '.html'
+                $(this).load(file)
+            })
+        })
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
+    <div data-include-html="headermenu"></div>
     <h1>About</h1>
     <p1>This is the home page for the US/TS DevRel SRE Experimentation full stack web application. At the top of this page, you'll find hyperlinks to the other pages within the application.</p1>
 
