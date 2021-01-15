@@ -25,6 +25,9 @@ app.get('/azurestorage', (req, res) => {
 app.get('/kassiendpoint', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'Kassi.html'));
 });
+app.get('/headermenu', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '..', 'public', 'headermenu.html'));
+});
 app.listen(port, () => {
     appInsights.loadAppInsights();
     appInsights.trackPageView();
