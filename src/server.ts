@@ -26,6 +26,10 @@ app.get('/kassiendpoint', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'Kassi.html'));
 });
 
+app.get('/headermenu', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'headermenu.html'));
+});
+
 app.listen(port, () => {
     appInsights.loadAppInsights();
     appInsights.trackPageView(); 
