@@ -12,7 +12,7 @@
                 var includes = $('[data-include-html]');
                 $.each(includes, function () {
                     var file = $(this).attr('data-include-html');
-                    alert(file);
+                    //alert(file);
                     $(this).load(file);
                 });
             });
@@ -22,9 +22,10 @@
 </head>
 
 <body>
-    <a href="/iss">ISS Real-Time Tracking</a>
+ <!-- <a href="/iss">ISS Real-Time Tracking</a>
  | <a href="/azurestorage">Download Azure Blobs</a>
  | <a href="/kassiendpoint">Kassi's Endpoint</a>
+ -->
     <div data-include-html="headermenu"></div>
     <h1>About</h1>
     <p1>This is the home page for the US/TS DevRel SRE Experimentation full stack web application. At the top of this page, you'll find hyperlinks to the other pages within the application.</p1>
