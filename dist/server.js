@@ -6,10 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 const path_1 = __importDefault(require("path"));
-const applicationinsights_1 = __importDefault(require("applicationinsights"));
+const applicationinsights_web_1 = require("@microsoft/applicationinsights-web");
 const port = process.env.PORT;
 app.use(express_1.default.json());
-applicationinsights_1.default.setup('67aeb7cb-5815-4a0b-aaf5-f75c77140ff5').start();
+const appInsights = new applicationinsights_web_1.ApplicationInsights({ config: {
+        instrumentationKey: '67aeb7cb-5815-4a0b-aaf5-f75c77140ff5'
+        //...Other Configuration Options...
+    } });
+appInsights.loadAppInsights();
+appInsights.trackPageView();
 app.get('/', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, '..', 'public', 'index.html'));
 });

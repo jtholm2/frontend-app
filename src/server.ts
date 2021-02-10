@@ -1,11 +1,17 @@
 import express from 'express';
 const app = express();
 import path from 'path';
-import appInsights from 'applicationinsights'
+import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 const port = process.env.PORT;
 app.use(express.json());
 
-appInsights.setup('67aeb7cb-5815-4a0b-aaf5-f75c77140ff5').start();
+const appInsights = new ApplicationInsights({ config: {
+    instrumentationKey: '67aeb7cb-5815-4a0b-aaf5-f75c77140ff5'
+    //...Other Configuration Options...
+  } });
+
+appInsights.loadAppInsights();
+appInsights.trackPageView();
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
