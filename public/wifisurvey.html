@@ -19,6 +19,13 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mymap);
             
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup(feature.properties.popupContent);
+                }
+            }
+
             async function getData() {
                 var geojsonFeatures = {"features": []};
                 fetch("https://sre-experimentation-backendapp.azurewebsites.net/wifisurvey").then(function (response) {
@@ -29,15 +36,16 @@
                             var name = newJson.kml.Document.Placemark[placemark].name
                             var coords = newJson.kml.Document.Placemark[placemark].Point.coordinates.split(',')
                             if(coords[0] != 'WPA2' && coords[1] != 'WPA2'){
-                                geojsonFeatures["features"][placemark-numberOfInvalidCoords] = {"type": "Feature", "properties": {"name": `${name}`, "show_on_map": true}, "geometry": {"type": "Point", "coordinates": [parseFloat(coords[0]),parseFloat(coords[1])]}};
+                                geojsonFeatures["features"][placemark-numberOfInvalidCoords] = {"type": "Feature", "properties": {"name": `${name}`, "show_on_map": true, "popupContent": `${name}`}, "geometry": {"type": "Point", "coordinates": [parseFloat(coords[0]),parseFloat(coords[1])]}};
                                 console.log(geojsonFeatures["features"][placemark-numberOfInvalidCoords]["geometry"]);
                             }
                             else{
                                 numberOfInvalidCoords++;
                             }
                         }
-                        L.geoJSON(geojsonFeatures).addTo(mymap);
-                    
+                        L.geoJSON(geojsonFeatures, {
+                            onEachFeature: onEachFeature
+                        }).addTo(mymap);
                     })
                 });
             };
